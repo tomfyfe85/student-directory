@@ -1,5 +1,5 @@
 
-@students = []
+@students = [ ]
 
 # students = [
 #  {name: "Dr. Hannibal Lecter", cohort: :november},
@@ -14,14 +14,13 @@
 #  {name:"Norman Bates", cohort: :november},
 # ]
 def input_students
-  puts
   puts "please enter the names of the students"
   puts "To finish, just hit return twice"
   #get the first name
   name = gets.chomp 
   #while the name is not empty repeat this code
   while !name.empty? do 
-    students << {name: name, cohort: :november}
+    @students << {name: name, cohort: :november}
     puts "Now we have #{@students.count} students"
     # get another name from user
     name = gets.chomp
@@ -43,8 +42,8 @@ end
 
 def show_students
   print_header
-  print(students)
-  print_footer(students)
+  print_student_list
+  print_footer
 end 
 
 def process(selection)
@@ -67,7 +66,7 @@ def print_header
 end
 
 def print_student_list
-  @student.each do |student|
+  @students.each do |student|
   puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end 
 end
@@ -77,10 +76,12 @@ def print_footer
   puts
 end 
 
-
 interactive_menu
-students = input_students
+@students = input_students
+print_menu
+show_students
+process
 print_header
-print(@students)
-print_footer(@students)
+print_student_list
+print_footer
 
